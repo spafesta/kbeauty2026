@@ -219,3 +219,34 @@ tbody tr > td:first-child::before { display: none; }
 .topic-body h4 { font-size: 17.5px; font-weight: 700; margin-bottom: 6px; }
 .callout.soft { margin-top: 56px; }
 @media (prefers-reduced-motion: reduce) { .qa summary::after, .topic > summary::after { transition: none; } }
+
+/* 핵심 3줄: 주제를 열면 가장 먼저, 가장 크게 */
+.keybox { background: var(--tint); border-radius: 16px; padding: 18px 18px 6px; margin-top: 4px; }
+.kb-title { font-size: 14px; font-weight: 700; color: var(--brand); margin-bottom: 8px; }
+.keybox ol { list-style: none; counter-reset: kb; padding: 0; margin: 0; }
+.keybox li { counter-increment: kb; position: relative; padding-left: 30px; margin-bottom: 12px; font-size: 17.5px; line-height: 1.65; }
+.keybox li::before { content: counter(kb); position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+.keybox b { color: var(--brand); }
+
+/* 자세히 보기 */
+.more { margin-top: 14px; }
+.more > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--brand-mid); border-radius: 999px; color: var(--brand); font-size: 15px; font-weight: 700; }
+.more > summary::-webkit-details-marker { display: none; }
+.more > summary::after { content: "▾"; }
+.more[open] > summary::after { content: "▴"; }
+.more[open] > summary { margin-bottom: 6px; }
+.more > section { margin-top: 28px; }
+
+/* 표는 하나의 표로 */
+.table-wrap { overflow-x: auto; margin-bottom: 14px; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.55; }
+thead { display: table-header-group; }
+tbody { display: table-row-group; }
+tbody tr { display: table-row; padding: 0; border: 0; }
+th, td, tbody th, tbody td { display: table-cell; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; margin: 0; font-size: 15px; }
+thead th { background: var(--tint); color: var(--brand); font-weight: 700; font-size: 14px; white-space: nowrap; }
+tbody th { font-weight: 700; color: var(--ink); }
+tbody tr:last-child > * { border-bottom: 0; }
+tbody td::before { content: none; }
+tbody tr > td:first-child { font-size: 15px; font-weight: 400; }
+.card > .pill { display: none; }
