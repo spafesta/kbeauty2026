@@ -250,3 +250,60 @@ tbody tr:last-child > * { border-bottom: 0; }
 tbody td::before { content: none; }
 tbody tr > td:first-child { font-size: 15px; font-weight: 400; }
 .card > .pill { display: none; }
+
+/* PC: 좌우로 넓게 (휴대폰 화면은 위 규칙 그대로) */
+@media (min-width: 900px) {
+  body { font-size: 17.5px; }
+  .wrap { max-width: 1120px; padding-inline: 40px; }
+  .top-in { min-height: 60px; }
+  .brand { font-size: 16px; }
+  .hero { padding-block: 64px 56px; }
+  .hero h1 { font-size: 48px; }
+  .hero .lead { font-size: 19px; max-width: 40em; }
+
+  .key { margin-top: 56px; }
+  .key h2, .group > h2 { font-size: 26px; }
+  .key-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 28px; }
+  .key-list li, .key-list li:last-child { border: 0; border-top: 3px solid var(--brand-soft); padding: 18px 0 0 0; }
+  .key-list li::before { position: static; display: grid; margin-bottom: 10px; }
+
+  .group { margin-top: 72px; }
+  .qlist { grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: start; }
+  .qlist .part { grid-column: 1 / -1; }
+  .qa:last-of-type { border-bottom: 0; }
+
+  .topic > summary { grid-template-columns: 40px 1fr; padding-block: 22px; }
+  .topic > summary .n { width: 34px; height: 34px; font-size: 15px; }
+  .topic > summary .tt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px 32px; align-items: baseline; }
+  .topic > summary .tt b { font-size: 20px; }
+  .topic > summary .tt small { font-size: 15.5px; margin: 0; }
+  .topic-body { padding: 4px 0 48px 52px; }
+
+  .keybox { padding: 24px 28px 14px; }
+  .keybox ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
+  .keybox li { font-size: 17.5px; padding-left: 0; padding-top: 32px; }
+  .keybox li::before { top: 0; }
+
+  .more > section { margin-top: 40px; }
+  .more p, .more ul { max-width: none; }
+  .topic-body h3 { font-size: 22px; }
+  .grid2, .stats, .map { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .grid3 { grid-template-columns: repeat(3, 1fr); column-gap: 32px; }
+  .stack { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .stats { grid-template-columns: repeat(3, 1fr); }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .ox { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .ox li:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  .eq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .eq li:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  .check { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .faq .qa-item { padding: 16px 0; }
+  .faq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: start; }
+  .faq h3 { grid-column: 1 / -1; }
+  .table-wrap table { font-size: 16px; }
+  th, td, tbody th, tbody td { padding: 12px 16px; font-size: 16px; }
+  .callout { padding: 28px 32px; }
+  .callout.soft { max-width: none; }
+  .uv { max-width: 560px; }
+  .refs ol { columns: 2; column-gap: 40px; }
+}
