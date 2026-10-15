@@ -89,58 +89,29 @@
 <p>피부에 불편이 계속되면 가까운 약국의 약사나 의사와 상의하세요.</p>
 </div></footer>
 <div class="survey" id="survey" hidden role="dialog" aria-modal="true" aria-labelledby="sv-title">
-<form class="sv-box" id="sv-form">
+<div class="sv-box">
 <button type="button" class="sv-x" id="sv-close" aria-label="닫기">×</button>
 <p class="sv-eyebrow">K-뷰티가 뭔가요? 부스</p>
 <h2 id="sv-title">부스는 어떠셨나요?</h2>
-<p class="sv-sub">10초면 끝나요. 더 좋은 행사를 만드는 데 쓸게요.</p>
-<fieldset><legend>1. 부스 방문은 만족스러우셨나요?</legend>
-<div class="sv-opts">
-<label><input type="radio" name="q1" value="매우 만족" required><span>매우 만족</span></label>
-<label><input type="radio" name="q1" value="만족"><span>만족</span></label>
-<label><input type="radio" name="q1" value="보통"><span>보통</span></label>
-<label><input type="radio" name="q1" value="아쉬움"><span>아쉬움</span></label>
-</div></fieldset>
-<fieldset><legend>2. 가장 도움이 된 것은?</legend>
-<div class="sv-opts">
-<label><input type="radio" name="q2" value="약사 상담" required><span>약사 상담</span></label>
-<label><input type="radio" name="q2" value="포스터·안내물"><span>포스터·안내물</span></label>
-<label><input type="radio" name="q2" value="스티커 참여"><span>스티커 참여</span></label>
-<label><input type="radio" name="q2" value="기념품"><span>기념품</span></label>
-</div></fieldset>
-<label class="sv-text" for="sv-q3">3. 한마디 남겨 주세요 <small>(선택)</small></label>
-<input id="sv-q3" name="q3" type="text" maxlength="200" placeholder="좋았던 점, 아쉬운 점">
-<button type="submit" class="sv-send">보내기</button>
+<p class="sv-sub">질문 3개, 10초면 끝나요. 더 좋은 행사를 만드는 데 쓸게요.</p>
+<a class="sv-send" id="sv-go" href="https://forms.gle/NCLPAkc66vgqYGrW7" target="_blank" rel="noopener">설문 참여하기</a>
 <button type="button" class="sv-later" id="sv-later">다음에 할게요</button>
-<p class="sv-done" id="sv-done" hidden>고마워요! 응답이 전달됐어요.</p>
-</form>
+</div>
 </div>
 <script>
 (function () {
-  // Google 폼 연결 정보: 폼을 만든 뒤 여기만 채우면 팝업이 켜져요
-  var FORM = { action: "", q1: "", q2: "", q3: "" };
   var KEY = "kb2026-survey-done";
   var box = document.getElementById("survey");
   function seen() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function mark(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function close(v) { box.hidden = true; document.body.classList.remove("sv-lock"); mark(v); }
-  if (!FORM.action || seen()) return;
+  if (seen()) return;
   setTimeout(function () { box.hidden = false; document.body.classList.add("sv-lock"); }, 600);
   document.getElementById("sv-close").onclick = function () { close("closed"); };
   document.getElementById("sv-later").onclick = function () { close("later"); };
+  document.getElementById("sv-go").onclick = function () { close("sent"); };
   box.addEventListener("click", function (e) { if (e.target === box) close("closed"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) close("closed"); });
-  document.getElementById("sv-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var f = e.target, data = new FormData();
-    data.append(FORM.q1, f.q1.value); data.append(FORM.q2, f.q2.value);
-    if (FORM.q3 && f.q3.value.trim()) data.append(FORM.q3, f.q3.value.trim());
-    fetch(FORM.action, { method: "POST", mode: "no-cors", body: data }).catch(function () {});
-    document.getElementById("sv-done").hidden = false;
-    f.querySelector(".sv-send").disabled = true;
-    mark("sent");
-    setTimeout(function () { close("sent"); }, 1400);
-  });
 })();
 </script>
 </body>
