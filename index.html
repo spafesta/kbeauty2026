@@ -93,8 +93,8 @@
 <button type="button" class="sv-x" id="sv-close" aria-label="닫기">×</button>
 <p class="sv-eyebrow">K-뷰티가 뭔가요? 부스</p>
 <h2 id="sv-title">부스는 어떠셨나요?</h2>
-<p class="sv-sub">질문 3개, 10초면 끝나요. 더 좋은 행사를 만드는 데 쓸게요.</p>
-<a class="sv-send" id="sv-go" href="https://forms.gle/NCLPAkc66vgqYGrW7" target="_blank" rel="noopener">설문 참여하기</a>
+<p class="sv-sub">질문 3개, 10초면 끝나요. 다 하셨으면 ×로 닫아 주세요.</p>
+<iframe class="sv-frame" id="sv-frame" title="부스 만족도 설문" loading="lazy" data-src="https://docs.google.com/forms/d/e/1FAIpQLSfaYmOX0_X5eqYm0w0gfnd2gLEqZD7apLxWpa7fwV1RPJ5GwA/viewform?embedded=true"></iframe>
 <button type="button" class="sv-later" id="sv-later">다음에 할게요</button>
 </div>
 </div>
@@ -106,10 +106,10 @@
   function mark(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function close(v) { box.hidden = true; document.body.classList.remove("sv-lock"); mark(v); }
   if (seen()) return;
+  var fr = document.getElementById("sv-frame"); fr.src = fr.dataset.src;
   setTimeout(function () { box.hidden = false; document.body.classList.add("sv-lock"); }, 600);
   document.getElementById("sv-close").onclick = function () { close("closed"); };
   document.getElementById("sv-later").onclick = function () { close("later"); };
-  document.getElementById("sv-go").onclick = function () { close("sent"); };
   box.addEventListener("click", function (e) { if (e.target === box) close("closed"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) close("closed"); });
 })();

@@ -760,3 +760,5 @@ body.sv-lock { overflow: hidden; }
 .sv-done { text-align: center; color: var(--brand); font-weight: 700; margin: 4px 0 0; }
 @media (min-width: 640px) { .survey { align-items: center; } }
 .sv-send { display: block; text-align: center; text-decoration: none; }
+.sv-box { max-width: 520px; }
+.sv-frame { display: block; width: 100%; height: 60vh; min-height: 380px; border: 0; border-radius: 12px; background: var(--brand-tint, #fff5f8); }
