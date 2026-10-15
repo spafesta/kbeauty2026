@@ -259,3 +259,28 @@ tbody tr > td:first-child:only-child::before { display: none; }
   tbody td::before { display: none; }
   tbody tr:last-child > * { border-bottom: 0; }
 }
+
+/* 만족도 팝업 */
+body.sv-lock { overflow: hidden; }
+.survey { position: fixed; inset: 0; z-index: 50; background: rgba(47, 35, 41, .45); display: flex; align-items: flex-end; justify-content: center; padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+.survey[hidden] { display: none; }
+.sv-box { position: relative; width: 100%; max-width: 440px; max-height: 92vh; overflow-y: auto; background: #fff; border-radius: 20px; padding: 22px 20px 16px; }
+.sv-x { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: 0; background: none; font-size: 28px; color: var(--muted); cursor: pointer; }
+.sv-eyebrow { font-size: 13px; color: var(--brand); font-weight: 700; margin: 0 0 4px; }
+.sv-box h2 { font-size: 21px; font-weight: 900; margin-bottom: 4px; }
+.sv-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 14px; }
+.sv-box fieldset { border: 0; padding: 0; margin: 0 0 14px; }
+.sv-box legend, .sv-text { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; display: block; }
+.sv-text small { font-weight: 400; color: var(--muted); }
+.sv-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.sv-opts label { position: relative; }
+.sv-opts input { position: absolute; opacity: 0; }
+.sv-opts span { display: block; text-align: center; padding: 10px 6px; border: 1px solid var(--line); border-radius: 12px; font-size: 15px; cursor: pointer; }
+.sv-opts input:checked + span { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 700; }
+.sv-opts input:focus-visible + span { outline: 3px solid var(--brand); outline-offset: 2px; }
+#sv-q3 { width: 100%; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 14px; }
+.sv-send { width: 100%; font: inherit; font-weight: 700; font-size: 16px; padding: 12px; border: 0; border-radius: 999px; background: var(--brand); color: #fff; cursor: pointer; }
+.sv-send:disabled { opacity: .6; }
+.sv-later { width: 100%; font: inherit; font-size: 14.5px; padding: 10px; border: 0; background: none; color: var(--muted); cursor: pointer; }
+.sv-done { text-align: center; color: var(--brand); font-weight: 700; margin: 4px 0 0; }
+@media (min-width: 640px) { .survey { align-items: center; } }
