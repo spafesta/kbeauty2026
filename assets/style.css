@@ -73,14 +73,15 @@ b, strong { font-weight: 700; }
 .key-grid li b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 2px; }
 .key-grid .ic { display: block; font-size: 24px; line-height: 1; margin-bottom: 8px; }
 
-.group-label { font-size: 13px; font-weight: 700; color: var(--brand-deep); margin: 22px 4px 8px; letter-spacing: .02em; }
-.cards { display: grid; gap: 10px; }
-.tcard { display: grid; grid-template-columns: 48px 1fr 20px; gap: 12px; align-items: center; background: var(--surface); border-radius: var(--radius); padding: 14px 14px 14px 12px; box-shadow: var(--shadow); color: var(--ink); text-decoration: none; transition: transform .15s, box-shadow .15s; }
+.group-label { font-size: 17px; font-weight: 900; color: var(--brand-deep); margin: 26px 2px 10px; letter-spacing: -.01em; display: flex; align-items: center; gap: 8px; }
+.group-label::before { content: ""; display: inline-block; width: 4px; height: 16px; background: var(--brand); border-radius: 2px; }
+.cards { display: grid; gap: 11px; }
+.tcard { display: grid; grid-template-columns: 50px 1fr 20px; gap: 14px; align-items: center; background: var(--surface); border-radius: var(--radius); padding: 15px 15px 15px 13px; box-shadow: var(--shadow); color: var(--ink); text-decoration: none; transition: transform .15s, box-shadow .15s; }
 .tcard:active { transform: scale(.985); }
-.tcard .ico { width: 48px; height: 48px; border-radius: 14px; background: var(--brand-tint); display: grid; place-items: center; font-size: 24px; position: relative; }
-.tcard .ico em { position: absolute; top: -5px; left: -5px; min-width: 20px; height: 20px; border-radius: 999px; background: var(--brand); color: #fff; font: 700 11px/20px var(--font); text-align: center; padding: 0 4px; }
-.tcard b { display: block; font-size: 16px; line-height: 1.45; margin-bottom: 1px; }
-.tcard small { display: block; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+.tcard .ico { width: 50px; height: 50px; border-radius: 15px; background: var(--brand-tint); display: grid; place-items: center; font-size: 24px; position: relative; }
+.tcard .ico em { position: absolute; top: -5px; left: -5px; min-width: 22px; height: 22px; border-radius: 999px; background: var(--brand); color: #fff; font: 700 12px/22px var(--font); text-align: center; padding: 0 4px; }
+.tcard b { display: block; font-size: 17px; line-height: 1.45; margin-bottom: 3px; }
+.tcard small { display: block; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .tcard::after { content: "›"; font-size: 24px; color: var(--brand); text-align: right; }
 
 .ask { margin-top: 32px; padding: 20px; border-radius: var(--radius); background: linear-gradient(135deg, #ffe3ec, #fff0f5); }
