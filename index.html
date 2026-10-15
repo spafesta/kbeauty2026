@@ -89,29 +89,110 @@
 <p>피부에 불편이 계속되면 가까운 약국의 약사나 의사와 상의하세요.</p>
 </div></footer>
 <div class="survey" id="survey" hidden role="dialog" aria-modal="true" aria-labelledby="sv-title">
-<div class="sv-box">
-<button type="button" class="sv-x" id="sv-close" aria-label="닫기">×</button>
-<p class="sv-eyebrow">K-뷰티가 뭔가요? 부스</p>
-<h2 id="sv-title">부스는 어떠셨나요?</h2>
-<p class="sv-sub">질문 3개, 10초면 끝나요. 다 하셨으면 ×로 닫아 주세요.</p>
-<iframe class="sv-frame" id="sv-frame" title="부스 만족도 설문" loading="lazy" data-src="https://docs.google.com/forms/d/e/1FAIpQLSfaYmOX0_X5eqYm0w0gfnd2gLEqZD7apLxWpa7fwV1RPJ5GwA/viewform?embedded=true"></iframe>
-<button type="button" class="sv-later" id="sv-later">다음에 할게요</button>
+  <div class="sv-box">
+    <button type="button" class="sv-x" id="sv-close" aria-label="닫기">×</button>
+    <div id="sv-content">
+      <p class="sv-eyebrow">2026 건강서울페스티벌 · K-뷰티 부스</p>
+      <h2 id="sv-title">부스는 어떠셨나요? 💕</h2>
+      <p class="sv-sub">질문 2개, 10초면 끝나요! 더 좋은 행사를 만드는 데 쓸게요.</p>
+      
+      <form id="sv-form">
+        <fieldset class="sv-group">
+          <legend>1. 부스 방문은 만족스러우셨나요? <span class="req">*</span></legend>
+          <div class="sv-opts">
+            <label><input type="radio" name="q1" value="매우 만족" required><span>😍 매우 만족</span></label>
+            <label><input type="radio" name="q1" value="만족"><span>😊 만족</span></label>
+            <label><input type="radio" name="q1" value="보통"><span>😐 보통</span></label>
+            <label><input type="radio" name="q1" value="아쉬움"><span>🙁 아쉬움</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="sv-group">
+          <legend>2. 가장 도움이 된 것은? <span class="req">*</span></legend>
+          <div class="sv-opts">
+            <label><input type="radio" name="q2" value="약사 상담" required><span>약사 상담</span></label>
+            <label><input type="radio" name="q2" value="포스터·안내물"><span>포스터·안내물</span></label>
+            <label><input type="radio" name="q2" value="스티커 참여"><span>스티커 참여</span></label>
+            <label><input type="radio" name="q2" value="기념품"><span>기념품</span></label>
+          </div>
+        </fieldset>
+
+        <div class="sv-group">
+          <label class="sv-text" for="sv-q3">3. 한마디 남겨 주세요 <small>(선택)</small></label>
+          <input id="sv-q3" name="q3" type="text" maxlength="200" placeholder="좋았던 점이나 바라는 점을 적어주세요">
+        </div>
+
+        <button type="submit" class="sv-send" id="sv-btn">소중한 의견 보내기</button>
+        <button type="button" class="sv-later" id="sv-later">다음에 할게요</button>
+      </form>
+    </div>
+
+    <div id="sv-done" hidden class="sv-done-box">
+      <div class="sv-heart">💖</div>
+      <h3>소중한 의견 고마워요!</h3>
+      <p>보내주신 피드백은 더 유익하고 친절한 부스를 만드는 데 큰 힘이 돼요.</p>
+    </div>
+  </div>
 </div>
-</div>
+
 <script>
 (function () {
   var KEY = "kb2026-survey-done";
   var box = document.getElementById("survey");
+  var form = document.getElementById("sv-form");
+  var content = document.getElementById("sv-content");
+  var done = document.getElementById("sv-done");
+
   function seen() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function mark(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function close(v) { box.hidden = true; document.body.classList.remove("sv-lock"); mark(v); }
+  function close(v) { 
+    box.hidden = true; 
+    document.body.classList.remove("sv-lock"); 
+    mark(v); 
+  }
+
   if (seen()) return;
-  var fr = document.getElementById("sv-frame"); fr.src = fr.dataset.src;
-  setTimeout(function () { box.hidden = false; document.body.classList.add("sv-lock"); }, 600);
+  setTimeout(function () { 
+    box.hidden = false; 
+    document.body.classList.add("sv-lock"); 
+  }, 700);
+
   document.getElementById("sv-close").onclick = function () { close("closed"); };
   document.getElementById("sv-later").onclick = function () { close("later"); };
   box.addEventListener("click", function (e) { if (e.target === box) close("closed"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) close("closed"); });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var btn = document.getElementById("sv-btn");
+    btn.disabled = true;
+    btn.textContent = "전송하는 중...";
+
+    // Google Form formResponse 엔드포인트
+    var action = "https://docs.google.com/forms/d/e/1FAIpQLSfaYmOX0_X5eqYm0w0gfnd2gLEqZD7apLxWpa7fwV1RPJ5GwA/formResponse";
+    var params = new URLSearchParams();
+    params.append("entry.257440449", form.q1.value);
+    params.append("entry.1698935317", form.q2.value);
+    if (form.q3.value.trim()) {
+      params.append("entry.690169775", form.q3.value.trim());
+    }
+
+    // Google Form은 no-cors로 비동기 제출
+    fetch(action, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString()
+    }).catch(function () {});
+
+    // 완료 화면 전환
+    content.hidden = true;
+    done.hidden = false;
+    mark("sent");
+    setTimeout(function () {
+      close("sent");
+    }, 1800);
+  });
 })();
 </script>
 </body>

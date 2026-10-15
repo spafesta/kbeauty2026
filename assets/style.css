@@ -735,30 +735,247 @@ tbody tr > td:first-child:not([data-label="성분"])::before { display: none; }
   tbody tr:last-child > * { border-bottom: 0; }
 }
 
-/* 만족도 팝업 */
+/* 9. 네이티브 만족도 설문 팝업 (모바일 최적화) */
 body.sv-lock { overflow: hidden; }
-.survey { position: fixed; inset: 0; z-index: 50; background: rgba(47, 35, 41, .45); display: flex; align-items: flex-end; justify-content: center; padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+.survey {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(30, 15, 22, .6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  animation: svFadeIn .25s ease-out;
+}
 .survey[hidden] { display: none; }
-.sv-box { position: relative; width: 100%; max-width: 440px; max-height: 92vh; overflow-y: auto; background: #fff; border-radius: 20px; padding: 22px 20px 16px; }
-.sv-x { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: 0; background: none; font-size: 28px; color: var(--muted); cursor: pointer; }
-.sv-eyebrow { font-size: 13px; color: var(--brand); font-weight: 700; margin: 0 0 4px; }
-.sv-box h2 { font-size: 21px; font-weight: 900; margin-bottom: 4px; }
-.sv-sub { font-size: 14.5px; color: var(--muted); margin-bottom: 14px; }
-.sv-box fieldset { border: 0; padding: 0; margin: 0 0 14px; }
-.sv-box legend, .sv-text { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; display: block; }
-.sv-text small { font-weight: 400; color: var(--muted); }
-.sv-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.sv-opts label { position: relative; }
-.sv-opts input { position: absolute; opacity: 0; }
-.sv-opts span { display: block; text-align: center; padding: 10px 6px; border: 1px solid var(--line); border-radius: 12px; font-size: 15px; cursor: pointer; }
-.sv-opts input:checked + span { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 700; }
-.sv-opts input:focus-visible + span { outline: 3px solid var(--brand); outline-offset: 2px; }
-#sv-q3 { width: 100%; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 14px; }
-.sv-send { width: 100%; font: inherit; font-weight: 700; font-size: 16px; padding: 12px; border: 0; border-radius: 999px; background: var(--brand); color: #fff; cursor: pointer; }
-.sv-send:disabled { opacity: .6; }
-.sv-later { width: 100%; font: inherit; font-size: 14.5px; padding: 10px; border: 0; background: none; color: var(--muted); cursor: pointer; }
-.sv-done { text-align: center; color: var(--brand); font-weight: 700; margin: 4px 0 0; }
-@media (min-width: 640px) { .survey { align-items: center; } }
-.sv-send { display: block; text-align: center; text-decoration: none; }
-.sv-box { max-width: 520px; }
-.sv-frame { display: block; width: 100%; height: 60vh; min-height: 380px; border: 0; border-radius: 12px; background: var(--brand-tint, #fff5f8); }
+@keyframes svFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sv-box {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px 20px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .2), 0 0 0 1px rgba(255, 212, 227, .6);
+  animation: svSlideUp .3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes svSlideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.sv-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--brand-tint, #fff0f5);
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.sv-x:active { transform: scale(.9); background: var(--brand-soft); }
+
+.sv-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-deep);
+  background: var(--brand-soft);
+  border-radius: 999px;
+  padding: 3px 12px;
+  margin-bottom: 8px;
+}
+.sv-box h2 {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.sv-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.sv-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 18px;
+}
+.sv-group legend, .sv-text {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 8px;
+  display: block;
+}
+.sv-group .req {
+  color: var(--brand);
+  font-weight: 900;
+}
+.sv-text small {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* 탭 칩 버튼 (라디오) */
+.sv-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.sv-opts label {
+  position: relative;
+  display: block;
+}
+.sv-opts input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.sv-opts span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all .15s ease;
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .02);
+}
+.sv-opts label:active span {
+  transform: scale(.97);
+}
+.sv-opts input:checked + span {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(214, 51, 108, .3);
+  transform: translateY(-1px);
+}
+
+/* 한마디 입력창 */
+#sv-q3 {
+  width: 100%;
+  font: inherit;
+  font-size: 14.5px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+#sv-q3:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(214, 51, 108, .15);
+}
+
+/* 액션 버튼 */
+.sv-send {
+  width: 100%;
+  font: inherit;
+  font-weight: 800;
+  font-size: 16px;
+  padding: 14px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f06595 0%, var(--brand) 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(214, 51, 108, .35);
+  margin-top: 6px;
+  transition: transform .15s, opacity .15s;
+}
+.sv-send:active {
+  transform: scale(.98);
+}
+.sv-send:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+.sv-later {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.sv-later:hover {
+  text-decoration: underline;
+}
+
+/* 완료 화면 애니메이션 */
+.sv-done-box {
+  text-align: center;
+  padding: 24px 10px 14px;
+  animation: svFadeIn .3s ease;
+}
+.sv-heart {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 14px;
+  animation: svHeartBeat .8s ease infinite alternate;
+}
+@keyframes svHeartBeat {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+.sv-done-box h3 {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--brand-deep);
+  margin-bottom: 8px;
+}
+.sv-done-box p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .survey {
+    align-items: center;
+    padding: 20px;
+  }
+  .sv-box {
+    padding: 30px 24px 24px;
+  }
+}
+
