@@ -123,7 +123,10 @@
         </div>
 
         <button type="submit" class="sv-send" id="sv-btn">소중한 의견 보내기</button>
-        <button type="button" class="sv-later" id="sv-later">다음에 할게요</button>
+        <div class="sv-foot-btns">
+          <button type="button" class="sv-today" id="sv-today">오늘 다시 표시 안 함</button>
+          <button type="button" class="sv-close-btn" id="sv-close-text">닫기</button>
+        </div>
       </form>
     </div>
 
@@ -143,24 +146,53 @@
   var content = document.getElementById("sv-content");
   var done = document.getElementById("sv-done");
 
-  function seen() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
-  function mark(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function close(v) { 
-    box.hidden = true; 
-    document.body.classList.remove("sv-lock"); 
-    mark(v); 
+  function getTodayStr() {
+    var d = new Date();
+    var m = (d.getMonth() + 1).toString().padStart(2, '0');
+    var day = d.getDate().toString().padStart(2, '0');
+    return d.getFullYear() + '-' + m + '-' + day;
   }
 
-  if (seen()) return;
+  function shouldHide() {
+    try {
+      var val = localStorage.getItem(KEY);
+      if (!val) return false;
+      if (val === "sent") return true;         // 이미 제출 완료
+      if (val === getTodayStr()) return true;  // 오늘 다시 표시 안 함 설정됨
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // 단순 닫기 (새로고침하면 다시 뜸)
+  function closeTemp() {
+    box.hidden = true;
+    document.body.classList.remove("sv-lock");
+  }
+
+  // 오늘 다시 보지 않기
+  function closeForToday() {
+    box.hidden = true;
+    document.body.classList.remove("sv-lock");
+    try { localStorage.setItem(KEY, getTodayStr()); } catch (e) {}
+  }
+
+  if (shouldHide()) return;
+
   setTimeout(function () { 
     box.hidden = false; 
     document.body.classList.add("sv-lock"); 
   }, 700);
 
-  document.getElementById("sv-close").onclick = function () { close("closed"); };
-  document.getElementById("sv-later").onclick = function () { close("later"); };
-  box.addEventListener("click", function (e) { if (e.target === box) close("closed"); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) close("closed"); });
+  // X버튼, 닫기 텍스트, 배경 클릭, ESC 키는 단순 닫기 (새로고침 시 다시 노출)
+  document.getElementById("sv-close").onclick = closeTemp;
+  document.getElementById("sv-close-text").onclick = closeTemp;
+  box.addEventListener("click", function (e) { if (e.target === box) closeTemp(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !box.hidden) closeTemp(); });
+
+  // 오늘 다시 표시 안 함 버튼
+  document.getElementById("sv-today").onclick = closeForToday;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -185,12 +217,13 @@
       body: params.toString()
     }).catch(function () {});
 
-    // 완료 화면 전환
+    // 완료 화면 전환 및 영구 제출완료 마킹
     content.hidden = true;
     done.hidden = false;
-    mark("sent");
+    try { localStorage.setItem(KEY, "sent"); } catch (e) {}
     setTimeout(function () {
-      close("sent");
+      box.hidden = true;
+      document.body.classList.remove("sv-lock");
     }, 1800);
   });
 })();
