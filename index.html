@@ -96,30 +96,33 @@
       <h2 id="sv-title">부스는 어떠셨나요? 💕</h2>
       <p class="sv-sub">질문 2개, 10초면 끝나요! 더 좋은 행사를 만드는 데 쓸게요.</p>
       
-      <form id="sv-form">
+      <!-- 숨김 iframe으로 백그라운드 전송 (CORS 차단 없이 구글폼에 100% 정상 저장) -->
+      <iframe name="sv_hidden_frame" id="sv_hidden_frame" style="display:none;" aria-hidden="true"></iframe>
+
+      <form id="sv-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfaYmOX0_X5eqYm0w0gfnd2gLEqZD7apLxWpa7fwV1RPJ5GwA/formResponse" method="POST" target="sv_hidden_frame">
         <fieldset class="sv-group">
           <legend>1. 부스 방문은 만족스러우셨나요? <span class="req">*</span></legend>
           <div class="sv-opts">
-            <label><input type="radio" name="q1" value="매우 만족" required><span>😍 매우 만족</span></label>
-            <label><input type="radio" name="q1" value="만족"><span>😊 만족</span></label>
-            <label><input type="radio" name="q1" value="보통"><span>😐 보통</span></label>
-            <label><input type="radio" name="q1" value="아쉬움"><span>🙁 아쉬움</span></label>
+            <label><input type="radio" name="entry.257440449" value="매우 만족" required><span>😍 매우 만족</span></label>
+            <label><input type="radio" name="entry.257440449" value="만족"><span>😊 만족</span></label>
+            <label><input type="radio" name="entry.257440449" value="보통"><span>😐 보통</span></label>
+            <label><input type="radio" name="entry.257440449" value="아쉬움"><span>🙁 아쉬움</span></label>
           </div>
         </fieldset>
 
         <fieldset class="sv-group">
           <legend>2. 가장 도움이 된 것은? <span class="req">*</span></legend>
           <div class="sv-opts">
-            <label><input type="radio" name="q2" value="약사 상담" required><span>약사 상담</span></label>
-            <label><input type="radio" name="q2" value="포스터·안내물"><span>포스터·안내물</span></label>
-            <label><input type="radio" name="q2" value="스티커 참여"><span>스티커 참여</span></label>
-            <label><input type="radio" name="q2" value="기념품"><span>기념품</span></label>
+            <label><input type="radio" name="entry.1698935317" value="약사 상담" required><span>약사 상담</span></label>
+            <label><input type="radio" name="entry.1698935317" value="포스터·안내물"><span>포스터·안내물</span></label>
+            <label><input type="radio" name="entry.1698935317" value="스티커 참여"><span>스티커 참여</span></label>
+            <label><input type="radio" name="entry.1698935317" value="기념품"><span>기념품</span></label>
           </div>
         </fieldset>
 
         <div class="sv-group">
           <label class="sv-text" for="sv-q3">3. 한마디 남겨 주세요 <small>(선택)</small></label>
-          <input id="sv-q3" name="q3" type="text" maxlength="200" placeholder="좋았던 점이나 바라는 점을 적어주세요">
+          <input id="sv-q3" name="entry.690169775" type="text" maxlength="200" placeholder="좋았던 점이나 바라는 점을 적어주세요">
         </div>
 
         <button type="submit" class="sv-send" id="sv-btn">소중한 의견 보내기</button>
@@ -194,28 +197,13 @@
   // 오늘 다시 표시 안 함 버튼
   document.getElementById("sv-today").onclick = closeForToday;
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  // 폼 전송: 브라우저 기본 전송이 hidden iframe을 타겟으로 실행됨
+  var submitted = false;
+  form.addEventListener("submit", function () {
+    submitted = true;
     var btn = document.getElementById("sv-btn");
     btn.disabled = true;
     btn.textContent = "전송하는 중...";
-
-    // Google Form formResponse 엔드포인트
-    var action = "https://docs.google.com/forms/d/e/1FAIpQLSfaYmOX0_X5eqYm0w0gfnd2gLEqZD7apLxWpa7fwV1RPJ5GwA/formResponse";
-    var params = new URLSearchParams();
-    params.append("entry.257440449", form.q1.value);
-    params.append("entry.1698935317", form.q2.value);
-    if (form.q3.value.trim()) {
-      params.append("entry.690169775", form.q3.value.trim());
-    }
-
-    // Google Form은 no-cors로 비동기 제출
-    fetch(action, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString()
-    }).catch(function () {});
 
     // 완료 화면 전환 및 영구 제출완료 마킹
     content.hidden = true;
