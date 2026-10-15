@@ -103,26 +103,26 @@
         <fieldset class="sv-group">
           <legend>1. 부스 방문은 만족스러우셨나요? <span class="req">*</span></legend>
           <div class="sv-opts">
-            <label><input type="radio" name="entry.257440449" value="매우 만족" required><span>😍 매우 만족</span></label>
-            <label><input type="radio" name="entry.257440449" value="만족"><span>😊 만족</span></label>
-            <label><input type="radio" name="entry.257440449" value="보통"><span>😐 보통</span></label>
-            <label><input type="radio" name="entry.257440449" value="아쉬움"><span>🙁 아쉬움</span></label>
+            <label><input type="radio" name="entry.274961324" value="매우 만족" required><span>😍 매우 만족</span></label>
+            <label><input type="radio" name="entry.274961324" value="만족"><span>😊 만족</span></label>
+            <label><input type="radio" name="entry.274961324" value="보통"><span>😐 보통</span></label>
+            <label><input type="radio" name="entry.274961324" value="아쉬움"><span>🙁 아쉬움</span></label>
           </div>
         </fieldset>
 
         <fieldset class="sv-group">
           <legend>2. 가장 도움이 된 것은? <span class="req">*</span></legend>
           <div class="sv-opts">
-            <label><input type="radio" name="entry.1698935317" value="약사 상담" required><span>약사 상담</span></label>
-            <label><input type="radio" name="entry.1698935317" value="포스터·안내물"><span>포스터·안내물</span></label>
-            <label><input type="radio" name="entry.1698935317" value="스티커 참여"><span>스티커 참여</span></label>
-            <label><input type="radio" name="entry.1698935317" value="기념품"><span>기념품</span></label>
+            <label><input type="radio" name="entry.1453852925" value="약사 상담" required><span>약사 상담</span></label>
+            <label><input type="radio" name="entry.1453852925" value="포스터·안내물"><span>포스터·안내물</span></label>
+            <label><input type="radio" name="entry.1453852925" value="스티커 참여"><span>스티커 참여</span></label>
+            <label><input type="radio" name="entry.1453852925" value="기념품"><span>기념품</span></label>
           </div>
         </fieldset>
 
         <div class="sv-group">
           <label class="sv-text" for="sv-q3">3. 한마디 남겨 주세요 <small>(선택)</small></label>
-          <input id="sv-q3" name="entry.690169775" type="text" maxlength="200" placeholder="좋았던 점이나 바라는 점을 적어주세요">
+          <input id="sv-q3" name="entry.917182338" type="text" maxlength="200" placeholder="좋았던 점이나 바라는 점을 적어주세요">
         </div>
 
         <button type="submit" class="sv-send" id="sv-btn">소중한 의견 보내기</button>
@@ -158,6 +158,10 @@
 
   function shouldHide() {
     try {
+      if (location.search.indexOf("survey") !== -1 || location.search.indexOf("test") !== -1) {
+        localStorage.removeItem(KEY);
+        return false;
+      }
       var val = localStorage.getItem(KEY);
       if (!val) return false;
       if (val === "sent") return true;         // 이미 제출 완료
