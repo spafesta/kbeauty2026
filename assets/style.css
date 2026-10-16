@@ -1024,8 +1024,10 @@ body.sv-lock { overflow: hidden; }
 .sp-list img[alt="알엑스미"] { max-height: 18px; }
 @media (min-width: 900px) { .sp-list { gap: 18px 14px; } .sp-list li { width: 88px; height: 34px; } .sp-list img { max-height: 28px; } .sp-list img[alt="알엑스미"] { max-height: 22px; } }
 /* 맨 아래 기관 로고 2배 */
-.lg-kbs, .foot-logos .lg-fest { height: 56px !important; } .foot-logos .lg-kpa { height: 22px !important; }
-.foot-logos { gap: 14px 22px; }
+@media (min-width: 900px) {
+  .lg-kbs, .foot-logos .lg-fest { height: 56px !important; } .foot-logos .lg-kpa { height: 22px !important; }
+  .foot-logos { gap: 14px 28px; }
+}
 /* 휴대폰: 협찬사 3개 + 4개 */
 @media (max-width: 899px) {
   .sp-list { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px 6px; }
