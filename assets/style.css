@@ -1015,3 +1015,11 @@ body.sv-lock { overflow: hidden; }
 @media (min-width: 900px) { .lg-kb { width: 140px !important; } .bar-kb { height: 20px !important; } .bar-fest { height: 28px !important; } .bar-kpa { height: 13px !important; } }
 .lg-kb { width: 200px !important; } @media (min-width: 900px) { .lg-kb { width: 260px !important; } }
 .bar-kb { height: 20px !important; } @media (min-width: 900px) { .bar-kb { height: 26px !important; } }
+/* 협찬사 로고 */
+.sponsors { margin: 4px 0 18px; padding-bottom: 16px; border-bottom: 1px solid var(--line); text-align: center; }
+.sp-title { font-size: 12.5px; font-weight: 700; color: var(--muted); letter-spacing: .02em; margin-bottom: 12px; }
+.sp-list { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 12px; max-width: 100%; }
+.sp-list li { flex: 0 0 auto; width: 72px; height: 30px; display: flex; align-items: center; justify-content: center; }
+.sp-list img { max-width: 100%; max-height: 22px; width: auto; height: auto; }
+.sp-list img[alt="알엑스미"] { max-height: 18px; }
+@media (min-width: 900px) { .sp-list { gap: 18px 14px; } .sp-list li { width: 88px; height: 34px; } .sp-list img { max-height: 28px; } .sp-list img[alt="알엑스미"] { max-height: 22px; } }
