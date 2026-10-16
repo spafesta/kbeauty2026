@@ -1038,10 +1038,10 @@ body.sv-lock { overflow: hidden; }
 @media (max-width: 899px) { .sp-list img { max-width: 74px; } .sp-list li:nth-child(-n+3) img { max-width: 92px; max-height: 24px; } }
 /* 첫 화면 제목: 로고와 같은 글꼴(Hahmlet) */
 .hero h1 { font-family: 'Hahmlet', 'Noto Serif KR', serif; font-weight: 700; letter-spacing: -.02em; line-height: 1.22; }
-/* 맨 아래: 한 줄 K-뷰티 로고 + 간격 넓힘 */
+/* 맨 아래: 한 줄 K-뷰티 로고 (0.7배 축소) + 간격 넓힘 */
 .foot-logos { gap: 14px 24px !important; flex-wrap: nowrap; }
-.foot-logos .lg-kbs { height: 18px !important; }
+.foot-logos .lg-kbs { height: 12.6px !important; }
 @media (min-width: 900px) {
   .foot-logos { gap: 14px 56px !important; }
-  .foot-logos .lg-kbs { height: 36px !important; }
+  .foot-logos .lg-kbs { height: 25px !important; }
 }
