@@ -1005,3 +1005,11 @@ body.sv-lock { overflow: hidden; }
 .bar-kpa { height: 13px; width: auto; }
 @media (max-width: 380px) { .bar-kb { height: 18px; } .bar-kpa { height: 11px; } .bar-orgs { gap: 6px; } }
 @media (min-width: 900px) { .bar-kb { height: 28px; } .bar-fest { height: 38px; } .bar-kpa { height: 18px; } }
+/* 로고 크기 줄임 */
+.lg-kb { width: 110px !important; margin-bottom: 8px; }
+.bar-kb { height: 16px !important; }
+.bar-fest { height: 22px !important; }
+.bar-kpa { height: 10px !important; }
+.lg-kbs, .foot-logos .lg-fest { height: 28px !important; } .foot-logos .lg-kpa { height: 11px !important; }
+.sv-kb { height: 26px !important; }
+@media (min-width: 900px) { .lg-kb { width: 140px !important; } .bar-kb { height: 20px !important; } .bar-fest { height: 28px !important; } .bar-kpa { height: 13px !important; } }
