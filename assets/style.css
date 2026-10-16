@@ -1014,3 +1014,4 @@ body.sv-lock { overflow: hidden; }
 .sv-kb { height: 26px !important; }
 @media (min-width: 900px) { .lg-kb { width: 140px !important; } .bar-kb { height: 20px !important; } .bar-fest { height: 28px !important; } .bar-kpa { height: 13px !important; } }
 .lg-kb { width: 200px !important; } @media (min-width: 900px) { .lg-kb { width: 260px !important; } }
+.bar-kb { height: 20px !important; } @media (min-width: 900px) { .bar-kb { height: 26px !important; } }
