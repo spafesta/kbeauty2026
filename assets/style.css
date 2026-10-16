@@ -998,3 +998,10 @@ body.sv-lock { overflow: hidden; }
 .lg-kbs { height: 48px; width: auto; }
 .sv-kb { height: 44px; width: auto; display: block; margin-bottom: 8px; }
 @media (min-width: 900px) { .lg-kb { width: 260px; } }
+/* 상단바 로고 */
+.bar-kb { height: 22px; width: auto; display: block; }
+.bar-orgs { margin-left: auto; display: flex; align-items: center; gap: 10px; flex: none; }
+.bar-fest { height: 30px; width: auto; }
+.bar-kpa { height: 13px; width: auto; }
+@media (max-width: 380px) { .bar-kb { height: 18px; } .bar-kpa { height: 11px; } .bar-orgs { gap: 6px; } }
+@media (min-width: 900px) { .bar-kb { height: 28px; } .bar-fest { height: 38px; } .bar-kpa { height: 18px; } }
