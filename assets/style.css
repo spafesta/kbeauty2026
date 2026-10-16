@@ -986,3 +986,15 @@ body.sv-lock { overflow: hidden; }
   }
 }
 
+/* 로고 */
+.logos { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 14px; }
+.lg-fest { height: 64px; width: auto; }
+.lg-kpa { height: 22px; width: auto; }
+.foot-logos { justify-content: center; margin: 8px 0 14px; }
+.foot-logos .lg-fest { height: 48px; } .foot-logos .lg-kpa { height: 18px; }
+.sv-logo { height: 16px; width: auto; display: block; margin-bottom: 8px; }
+@media (min-width: 900px) { .lg-fest { height: 84px; } .lg-kpa { height: 28px; } }
+.lg-kb { display: block; width: 200px; height: auto; margin: 0 0 12px; }
+.lg-kbs { height: 48px; width: auto; }
+.sv-kb { height: 44px; width: auto; display: block; margin-bottom: 8px; }
+@media (min-width: 900px) { .lg-kb { width: 260px; } }
