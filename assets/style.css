@@ -1036,3 +1036,5 @@ body.sv-lock { overflow: hidden; }
 }
 @media (max-width: 899px) { .sp-list img { max-width: 70px; max-height: 20px; } .sp-list img[alt="알엑스미"] { max-height: 17px; } }
 @media (max-width: 899px) { .sp-list img { max-width: 74px; } .sp-list li:nth-child(-n+3) img { max-width: 92px; max-height: 24px; } }
+/* 첫 화면 제목: 로고와 같은 글꼴(Hahmlet) */
+.hero h1 { font-family: 'Hahmlet', 'Noto Serif KR', serif; font-weight: 700; letter-spacing: -.02em; line-height: 1.22; }
