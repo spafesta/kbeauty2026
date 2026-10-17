@@ -1045,3 +1045,10 @@ body.sv-lock { overflow: hidden; }
   .foot-logos { gap: 14px 56px !important; }
   .foot-logos .lg-kbs { height: 25px !important; }
 }
+/* 제작·저작권 */
+.foot .credits { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.foot .credit { font-size: 13px; color: var(--ink); margin-bottom: 4px; }
+.foot .credit b { color: var(--brand); font-weight: 800; margin-right: 4px; }
+.foot .credit .names { color: var(--muted); }
+.foot .copy { font-size: 12px; color: var(--muted); margin-bottom: 0; }
+@media (max-width: 639px) { .foot .credit .sep { display: none; } .foot .credit .names { display: block; margin-top: 2px; } }
