@@ -1053,18 +1053,25 @@ body.sv-lock { overflow: hidden; }
 .foot .copy { font-size: 12px; color: var(--muted); margin-bottom: 0; }
 @media (max-width: 639px) { .foot .credit .sep { display: none; } .foot .credit .names { display: block; margin-top: 2px; } }
 /* 두 줄 행사명, 가운데 정렬 */
-.eyebrow { text-align: center; line-height: 1.55; border-radius: 18px; padding: 6px 16px; }
+.eyebrow { display: block; width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; text-align: center; line-height: 1.55; border-radius: 18px; padding: 6px 16px; }
 .foot .org { text-align: center; line-height: 1.55; }
-/* 첫 화면 제목 반짝임 */
-.hero h1 .l1, .hero h1 .l2 { -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 250% 100%; animation: kb-shine 3.6s ease-in-out infinite; }
-.hero h1 .l1 { background-image: linear-gradient(100deg, #2f2329 0%, #2f2329 38%, #ff8fb8 50%, #2f2329 62%, #2f2329 100%); }
-.hero h1 .l2 { background-image: linear-gradient(100deg, #e64980 0%, #b8336a 38%, #fff0f5 50%, #b8336a 62%, #e64980 100%); animation-delay: .35s; }
-@keyframes kb-shine { 0% { background-position: 120% 0; } 60%, 100% { background-position: -20% 0; } }
+/* 첫 화면 제목: 글씨색은 그대로, 빛줄기가 왼쪽에서 오른쪽으로 지나가요 */
+.hero h1 .l1, .hero h1 .l2 {
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  background-repeat: no-repeat; background-size: 300% 100%, 100% 100%;
+  background-position: 100% 0, 0 0;
+  animation: kb-sweep 3.8s cubic-bezier(.55,.05,.35,1) infinite;
+}
+.hero h1 .l1 { background-image: linear-gradient(105deg, rgba(255,255,255,0) 43%, rgba(255,228,240,.85) 47.5%, rgba(255,253,244,1) 50%, rgba(255,228,240,.85) 52.5%, rgba(255,255,255,0) 57%), linear-gradient(var(--ink), var(--ink)); }
+.hero h1 .l2 { background-image: linear-gradient(105deg, rgba(255,255,255,0) 43%, rgba(255,240,246,.9) 47.5%, rgba(255,255,250,1) 50%, rgba(255,240,246,.9) 52.5%, rgba(255,255,255,0) 57%), linear-gradient(120deg, #e64980, var(--brand-deep)); animation-delay: .22s; }
+@keyframes kb-sweep { 0% { background-position: 100% 0, 0 0; } 42%, 100% { background-position: 0% 0, 0 0; } }
+.hero h1 { animation: kb-glory 3.8s ease-in-out infinite; }
+@keyframes kb-glory { 0%, 6% { filter: drop-shadow(0 0 0 rgba(255,150,195,0)); } 24% { filter: drop-shadow(0 0 10px rgba(255,150,195,.55)); } 50%, 100% { filter: drop-shadow(0 0 0 rgba(255,150,195,0)); } }
 .hero h1 .spark { font-style: normal; display: inline-block; font-size: .42em; color: #f06595; vertical-align: super; margin-left: 4px; animation: kb-twinkle 1.8s ease-in-out infinite; }
 .hero h1 .spark.s2 { color: #fcc419; animation-delay: .9s; font-size: .5em; }
 @keyframes kb-twinkle { 0%, 100% { opacity: .15; transform: scale(.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(20deg); } }
 @media (prefers-reduced-motion: reduce) {
-  .hero h1 .l1, .hero h1 .l2, .hero h1 .spark { animation: none; }
-  .hero h1 .l1, .hero h1 .l2 { background-position: 0 0; }
+  .hero h1, .hero h1 .l1, .hero h1 .l2, .hero h1 .spark { animation: none; }
+  .hero h1 .l1, .hero h1 .l2 { background-position: 100% 0, 0 0; }
   .hero h1 .spark { opacity: 1; }
 }
