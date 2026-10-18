@@ -1075,3 +1075,11 @@ body.sv-lock { overflow: hidden; }
   .hero h1 .l1, .hero h1 .l2 { background-position: 100% 0, 0 0; }
   .hero h1 .spark { opacity: 1; }
 }
+/* 맨 아래 로고 세 개: 모바일에서 더 크게, 글자 크기를 키워도 한 줄로 나란히 */
+@media (max-width: 899px) {
+  .foot-logos { flex-wrap: nowrap !important; justify-content: center; gap: 0 4% !important; }
+  .foot .foot-logos img { flex: 0 1 auto; min-width: 0; height: auto !important; }
+  .foot-logos .lg-kbs { width: 37%; max-width: 197px; }
+  .foot-logos .lg-fest { width: 17.5%; max-width: 90px; }
+  .foot-logos .lg-kpa { width: 33.5%; max-width: 176px; }
+}
